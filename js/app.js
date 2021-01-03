@@ -9,7 +9,7 @@ const button = document.querySelector(".loadMore");
 let pageCount = 1;
 
 // Hide load button and results h2 initially
-button.hidden = true;
+button.style.display = "none";
 
 /**
  * Fetches API data based on user input
@@ -64,7 +64,7 @@ const fetchData = (search, page) => {
                     <h3>Name: ${result.name}</h3>
                     <p>Origin: ${result.origin.name}</p>
                     <p>Species: ${result.species}</p>
-                    <p>Status: 💀 </p>
+                    <p>Status: 💀</p>
                   </div>
                 </div>
             `;
@@ -75,7 +75,9 @@ const fetchData = (search, page) => {
 
         if (data.info.next) {
           pageCount++;
-          button.hidden = false;
+          button.style.display = "block";
+        } else {
+          button.style.display = "hidden";
         }
       });
     });
@@ -89,11 +91,10 @@ const fetchData = (search, page) => {
  *
  */
 const search = (e) => {
-  const searchValue = searchInput.value;
-
   pageCount = 1;
 
   if (e.code === "Enter") {
+    const searchValue = searchInput.value;
     cardContainer.innerHTML = "";
     fetchData(searchValue, pageCount);
   }

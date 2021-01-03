@@ -1,0 +1,40 @@
+fetch(apiUrl)
+      .then(function (response) {
+        if (response.status !== 200) {
+          const html = `
+            <h2>Oh no!</h2>
+            <p>It looks like something went wrong!</p>
+          `;
+          resultsContainer.innerHTML = html;
+
+          console.log("Status Code:" + response.status);
+          return;
+        }
+
+        response.json().then((data) => {
+          console.log(data.info.next);
+          const arr = data.results;
+
+          arr.forEach((result) => {
+            console.log(result.name);
+            let html = `
+              <div class="card">
+                <img src="${result.image}" alt="" />
+                <h3>Name: ${result.name}</h3>
+                <p>Origin: ${result.origin.name}</p>
+                <p>Species: ${result.species}</p>
+              </div>
+            `;
+
+            cardContainer.innerHTML += html;
+          });
+
+          if (data.info.next) {
+            pageCount += 1;
+            button.hidden = false;
+          }
+        });
+      })
+      .catch(function (err) {
+        console.log("Fetch Error", err);
+      });

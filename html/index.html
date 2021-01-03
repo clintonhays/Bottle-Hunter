@@ -3,24 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bottle Hunter</title>
+    <title>Rick & Morty Character Search</title>
   </head>
   <body>
     <header>
-      <h1>Bottle Hunter</h1>
+      <h1>Rick & Morty Character Search</h1>
     </header>
 
     <div class="container">
-      <section class="search">
-        <label for="search">Find a Brew:</label>
-        <input type="search" name="search" id="search" />
-      </section>
+      <label for="search">Search for a character:</label>
+      <input type="text" name="search" id="searchBar" placeholder="Enter character name" onkeypress="search(event)" />
 
       <section class="results">
-        <div class="container">
-          <h2>Enjoy your brews!</h2>
+        <div class="resultsContainer">
+          <h2>Check out these results!</h2>
+          <div class="cardsContainer"></div>
+          <div class="buttonContainer">
+            <button class="loadMore">Load More</button>
+          </div>
         </div>
       </section>
     </div>
+    <script src="/js/app.js"></script>
   </body>
 </html>

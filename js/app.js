@@ -1,14 +1,12 @@
 // Global Variables
 
 const searchInput = document.getElementById("searchBar");
-const searchValue = searchInput.value;
 const button = document.querySelector(".loadMore");
 let pageCount = 1;
 
 button.hidden = true;
 
 const fetchData = (search, page) => {
-  console.log(searchValue);
   const resultsContainer = document.querySelector(".resultsContainer");
   const cardContainer = document.querySelector(".cardsContainer");
   const apiUrl = `https://rickandmortyapi.com/api/character/?page=${page}&name=${search}`;
@@ -56,11 +54,13 @@ const fetchData = (search, page) => {
 };
 
 const search = (e) => {
+  const searchValue = searchInput.value;
   if (e.code === "Enter") {
     fetchData(searchValue, pageCount);
   }
 };
 
 button.addEventListener("click", () => {
+  const searchValue = searchInput.value;
   fetchData(searchValue, pageCount);
 });

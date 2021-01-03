@@ -1,0 +1,24 @@
+//
+// Card Design
+//
+
+.card {
+  display: flex;
+  // width: 5%;
+  background-color: whitesmoke;
+  // border: 1px solid white;
+  border-radius: 10px;
+
+  img {
+    width: 45%;
+    border-radius: 10px;
+  }
+
+  .info {
+    margin-left: 10px;
+
+    p {
+      margin-top: 10px;
+    }
+  }
+}

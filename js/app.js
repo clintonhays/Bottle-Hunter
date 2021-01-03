@@ -8,7 +8,7 @@ const button = document.querySelector(".loadMore");
 // Begin page count at 1 for API pagination
 let pageCount = 1;
 
-// Hide load button initially
+// Hide load button and results h2 initially
 button.hidden = true;
 
 /**
@@ -44,19 +44,33 @@ const fetchData = (search, page) => {
         const arr = data.results;
 
         arr.forEach((result) => {
-          let html = `
-              <h2>Check out your results!</h2>
-              <div class="cardsContainer">
+          if (result.status === "Alive") {
+            html = `
                 <div class="card">
-                  <img src="${result.image}" alt="" />
-                  <h3>Name: ${result.name}</h3>
-                  <p>Origin: ${result.origin.name}</p>
-                  <p>Species: ${result.species}</p>
+                  <img src="${result.image}" alt="image of ${result.name}" />
+                  <div class="info">
+                    <h3>Name: ${result.name}</h3>
+                    <p>Origin: ${result.origin.name}</p>
+                    <p>Species: ${result.species}</p>
+                    <p>Status: 😃</p>
+                  </div>
                 </div>
-              </div>
             `;
+          } else {
+            html = `
+                <div class="card">
+                  <img src="${result.image}" alt="image of ${result.name}" />
+                  <div class="info">
+                    <h3>Name: ${result.name}</h3>
+                    <p>Origin: ${result.origin.name}</p>
+                    <p>Species: ${result.species}</p>
+                    <p>Status: 💀 </p>
+                  </div>
+                </div>
+            `;
+          }
 
-          resultsContainer.innerHTML += html;
+          cardContainer.innerHTML += html;
         });
 
         if (data.info.next) {
@@ -80,7 +94,7 @@ const search = (e) => {
   pageCount = 1;
 
   if (e.code === "Enter") {
-    resultsContainer.innerHTML = "";
+    cardContainer.innerHTML = "";
     fetchData(searchValue, pageCount);
   }
 };

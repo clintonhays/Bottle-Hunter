@@ -1,0 +1,21 @@
+//
+// Results Container
+//
+
+.resultsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+//
+// Cards Container
+//
+
+.cardsContainer {
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  // grid-template-rows: repeat(5, 1fr);
+  gap: 2rem;
+}

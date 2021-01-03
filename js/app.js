@@ -1,14 +1,14 @@
 // Global Variables
 
 const searchInput = document.getElementById("searchBar");
+const resultsContainer = document.querySelector(".resultsContainer");
+const cardContainer = document.querySelector(".cardsContainer");
 const button = document.querySelector(".loadMore");
 let pageCount = 1;
 
 button.hidden = true;
 
 const fetchData = (search, page) => {
-  const resultsContainer = document.querySelector(".resultsContainer");
-  const cardContainer = document.querySelector(".cardsContainer");
   const apiUrl = `https://rickandmortyapi.com/api/character/?page=${page}&name=${search}`;
   console.log("Page count:", pageCount);
   console.log("First url:", apiUrl);
@@ -33,21 +33,24 @@ const fetchData = (search, page) => {
 
         arr.forEach((result) => {
           let html = `
-              <div class="card">
-                <img src="${result.image}" alt="" />
-                <h3>Name: ${result.name}</h3>
-                <p>Origin: ${result.origin.name}</p>
-                <p>Species: ${result.species}</p>
+              <h2>Check out your results!</h2>
+              <div class="cardsContainer">
+                <div class="card">
+                  <img src="${result.image}" alt="" />
+                  <h3>Name: ${result.name}</h3>
+                  <p>Origin: ${result.origin.name}</p>
+                  <p>Species: ${result.species}</p>
+                </div>
               </div>
             `;
 
-          cardContainer.innerHTML += html;
+          resultsContainer.innerHTML += html;
         });
 
         if (data.info.next) {
           pageCount++;
-          console.log("Page count:", pageCount);
           button.hidden = false;
+          console.log("Page count:", pageCount);
         }
       });
     });
@@ -55,7 +58,11 @@ const fetchData = (search, page) => {
 
 const search = (e) => {
   const searchValue = searchInput.value;
+
+  pageCount = 1;
+
   if (e.code === "Enter") {
+    resultsContainer.innerHTML = "";
     fetchData(searchValue, pageCount);
   }
 };

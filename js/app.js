@@ -4,14 +4,27 @@ const searchInput = document.getElementById("searchBar");
 const resultsContainer = document.querySelector(".resultsContainer");
 const cardContainer = document.querySelector(".cardsContainer");
 const button = document.querySelector(".loadMore");
+
+// Begin page count at 1 for API pagination
 let pageCount = 1;
 
+// Hide load button initially
 button.hidden = true;
 
+/**
+ * Fetches API data based on user input
+ * On error - inserts error HTML
+ * On success - iterates through API data and creates card for each result
+ *              cards are inserted into HTML
+ *              if paginated data exists button is displayed to call fetchData()
+ *              and pageCount is incremented
+ *
+ * @param {string} search user defined search value
+ * @param {num} page incremented number for pagination of API
+ *
+ */
 const fetchData = (search, page) => {
   const apiUrl = `https://rickandmortyapi.com/api/character/?page=${page}&name=${search}`;
-  console.log("Page count:", pageCount);
-  console.log("First url:", apiUrl);
 
   fetch(apiUrl)
     //prettier ignore
@@ -28,7 +41,6 @@ const fetchData = (search, page) => {
       }
       //prettier ignore
       response.json().then((data) => {
-        console.log(data);
         const arr = data.results;
 
         arr.forEach((result) => {
@@ -50,12 +62,18 @@ const fetchData = (search, page) => {
         if (data.info.next) {
           pageCount++;
           button.hidden = false;
-          console.log("Page count:", pageCount);
         }
       });
     });
 };
 
+/**
+ * Calls fetchData() when search is submitted with enter key,
+ * resets pageCount, and resets resultsContainer
+ *
+ * @param {keypress} e submit search input
+ *
+ */
 const search = (e) => {
   const searchValue = searchInput.value;
 
@@ -66,6 +84,8 @@ const search = (e) => {
     fetchData(searchValue, pageCount);
   }
 };
+
+// Event listeners
 
 button.addEventListener("click", () => {
   const searchValue = searchInput.value;

@@ -6,6 +6,14 @@
   .cardsContainer {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  h1 {
+    font-size: 3em;
+  }
+
+  #searchBar {
+    width: 55%;
+  }
 }
 
 //
@@ -15,5 +23,9 @@
 @media (min-width: $xl) {
   .cardsContainer {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  #searchBar {
+    width: 45%;
   }
 }

@@ -382,11 +382,20 @@ header {
   .cardsContainer {
     grid-template-columns: repeat(2, 1fr);
   }
+  h1 {
+    font-size: 3em;
+  }
+  #searchBar {
+    width: 55%;
+  }
 }
 
 @media (min-width: 1200px) {
   .cardsContainer {
     grid-template-columns: repeat(3, 1fr);
+  }
+  #searchBar {
+    width: 45%;
   }
 }
 
@@ -430,7 +439,7 @@ input {
 
 .buttonContainer .loadMore {
   display: block;
-  background-color: yellowgreen;
+  background-color: #aaff00;
   outline: none;
   border: none;
   padding: 10px;

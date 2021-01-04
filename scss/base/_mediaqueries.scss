@@ -1,0 +1,19 @@
+//
+// 768px
+//
+
+@media (min-width: $md) {
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+//
+// 1200px
+//
+
+@media (min-width: $xl) {
+  .cardsContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

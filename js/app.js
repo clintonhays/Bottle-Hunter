@@ -1,7 +1,8 @@
 // Global Variables
 
 const searchInput = document.getElementById("searchBar");
-const resultsContainer = document.querySelector(".resultsContainer");
+const resultsHeader = document.querySelector(".resultsHeader");
+const error = document.querySelector(".error");
 const cardContainer = document.querySelector(".cardsContainer");
 const button = document.querySelector(".loadMore");
 
@@ -10,6 +11,7 @@ let pageCount = 1;
 
 // Hide load button and results h2 initially
 button.style.display = "none";
+error.hidden = true;
 
 /**
  * Fetches API data based on user input
@@ -30,18 +32,16 @@ const fetchData = (search, page) => {
     //prettier ignore
     .then((response) => {
       if (response.status !== 200) {
-        const html = `
-            <h2>Oh no!</h2>
-            <p>It looks like something went wrong!</p>
-          `;
-        resultsContainer.innerHTML = html;
+        resultsHeader.hidden = true;
+        error.hidden = false;
 
         console.log("Status Code:" + response.status);
         return;
       }
       //prettier ignore
       response.json().then((data) => {
-        document.querySelector(".resultsHeader").innerText = `There are ${data.info.count} results!`;
+        resultsHeader.hidden = false;
+        resultsHeader.innerText = `There are ${data.info.count} results!`;
 
         const arr = data.results;
 
@@ -101,6 +101,7 @@ const search = (e) => {
 
   if (e.code === "Enter") {
     const searchValue = searchInput.value;
+    error.hidden = true;
     cardContainer.innerHTML = "";
     fetchData(searchValue, pageCount);
   }

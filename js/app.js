@@ -41,6 +41,8 @@ const fetchData = (search, page) => {
       }
       //prettier ignore
       response.json().then((data) => {
+        document.querySelector(".resultsHeader").innerText = `There are ${data.info.count} results!`;
+
         const arr = data.results;
 
         arr.forEach((result) => {
@@ -73,11 +75,15 @@ const fetchData = (search, page) => {
           cardContainer.innerHTML += html;
         });
 
-        if (data.info.next) {
+        if (data.info.pages > 0) {
           pageCount++;
+          console.log(data.info.pages);
+          console.log(pageCount);
           button.style.display = "block";
-        } else {
-          button.style.display = "hidden";
+        }
+
+        if (pageCount === data.info.pages + 1) {
+          button.style.display = "none";
         }
       });
     });
@@ -105,4 +111,8 @@ const search = (e) => {
 button.addEventListener("click", () => {
   const searchValue = searchInput.value;
   fetchData(searchValue, pageCount);
+});
+
+window.addEventListener("load", () => {
+  searchInput.value = "";
 });

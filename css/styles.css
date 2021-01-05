@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?Soon&family=Creepster&family=Exo:wght@100;400&display=swap");
 body {
-  background-image: url(../../img/background.png);
-  background-position: center;
-  background-repeat: repeat-y;
+  background: url(../../img/background.png) center repeat-y;
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

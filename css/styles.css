@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?Soon&family=Creepster&family=Exo:wght@100;400&display=swap");
 body {
-  background-image: url("https://crhdev.com/img/background.png");
+  background-image: url(../../img/background.png);
   background-position: center;
   background-repeat: repeat-y;
 }
